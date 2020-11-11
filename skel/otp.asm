@@ -4,11 +4,6 @@ section .text
     global otp
     extern printf
 
-my_return:
-    popa
-    leave
-    ret
-
 otp:
     ;; DO NOT MODIFY
     push    ebp

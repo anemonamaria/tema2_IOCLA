@@ -15,45 +15,24 @@ caesar:
     mov     edi, [ebp + 16]     ; key
     mov     ecx, [ebp + 20]     ; length
     ;; DO NOT MODIFY
+    mov eax, ecx
+    dec eax     ; nr de iteratii
+    ; A = 65, Z = 90, a = 97, z = 122
+    label:
+
+    mov ebx, [esi + eax] ; retinem prima litera din plaintext
+    ;cmp ebx, 90          ; mai mare decat Z ?
+    ;jg  done
+    add ebx, edi         ; efectuam rotatia cu key
+    mov [edx + eax], bl ; retinem in ciphertext ce am criptat
+
+    dec eax
+    
+    cmp eax, -1
+    jne label
 
     ;; TODO: Implement the caesar cipher
-
-    dec     ecx               ; nu shiftam si \n
-    label:
-    cmp     byte [esi + ecx], 'A'
-    jb      .return             ; renunta daca e mai mic decat A
-
-    cmp     byte [esi + ecx], 'Z'
-    jbe     .shift_upper       ; se duce in cazul upper shift
-
-    cmp     byte [esi + ecx], 'z'
-    ja      .return            ; renuntam daca e mai mare decat Z
-
-    cmp     byte [esi + ecx], 'a'    
-    jae     .shift_lower       ; shifteaz daca e intre a si Z
-
-    cmp     ecx, -1
-    jne     label               ; refacem
-
-.shift_upper:
-    add byte [eax], bl      ; Shift the letter
-    cmp byte [eax], 'Z'     ; Is it below or equal to 'Z'?
-    jbe .return             ; If yes, finish functin
-
-    sub byte [eax], 26      ; If not, substract 26
-
-    jmp .return
-
-.shift_lower:
-    add byte [eax], bl      ; Shift the letter
-    cmp byte [eax], 'z'     ; Is it below or equal to 'z'?
-    jbe .return             ; If yes, finish functin
-
-    sub byte [eax], 26      ; If not, substract 26
-
-.return:
-    ret
-
+    ;done:
     ;; DO NOT MODIFY
     popa
     leave
