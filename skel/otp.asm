@@ -30,7 +30,6 @@ otp:
     
     cmp     eax, -1                 ; verificam daca eax a ajuns la numarul de iteratii
     jne     label                   ; necesar
-
     ;; DO NOT MODIFY
     popa
     leave

@@ -17,24 +17,54 @@ caesar:
     ;; DO NOT MODIFY
     mov eax, ecx
     dec eax     ; nr de iteratii
-    ; A = 65, Z = 90, a = 97, z = 122
     label:
 
-    mov ebx, [esi + eax] ; retinem prima litera din plaintext
-    ;cmp ebx, 90          ; mai mare decat Z ?
-    ;jg  done
-    add ebx, edi         ; efectuam rotatia cu key
-    mov [edx + eax], bl ; retinem in ciphertext ce am criptat
+    mov bl, [esi + eax] ; retinem prima litera din plaintext
+    cmp bl, 'A'            ; daca e <' A' nu facem nimic
+    jl do_nothing
 
+    cmp bl, 'z'             ; daca e > 'z' nu facem nimic
+    jg do_nothing
+
+    cmp bl, 'Z'             ; daca e < 'Z' efectuam rotatia
+    jle normal_rotation_upper
+
+    cmp bl, 'a'             ; daca e > 'a' efectuam rotatia
+    jge normal_rotation_lower
+
+    jmp do_nothing          ; daca nu intra in niciunul din cazurile de mmi sus
+    normal_rotation_upper: add ebx, edi         ; efectuam rotatia cu key
+    cmp bl, 'Z'
+    jg inverse_rotation
+    jmp insert
+    inverse_rotation: sub ebx, 26               ;daca e > Z ramanem la litere mari
+    jmp insert
+ 
+    normal_rotation_lower: add ebx, edi         ; efectuam rotatia cu key
+    turn_back:
+    cmp bl, 'z'
+    jg inverse_rotation2
+    cmp bl, 0 
+    jl overflow
+    jmp insert
+    inverse_rotation2: sub ebx, 26               ;daca e > z ramanem la litere mici
+    jmp insert
+
+    insert:
+    do_nothing: nop 
+    mov [edx + eax], bl ; retinem in ciphertext ce am criptat
+    
     dec eax
     
     cmp eax, -1
     jne label
 
     ;; TODO: Implement the caesar cipher
-    ;done:
+
     ;; DO NOT MODIFY
     popa
     leave
     ret
     ;; DO NOT MODIFY
+    overflow: add ebx, 230
+    jmp turn_back
