@@ -17,7 +17,6 @@ otp:
     ;; DO NOT MODIFY
 
     ;; TODO: Implement the One Time Pad cipher
-
     mov     eax, ecx              ; numarul de iteratii 
     dec     eax
     label:
@@ -30,6 +29,7 @@ otp:
     
     cmp     eax, -1                 ; verificam daca eax a ajuns la numarul de iteratii
     jne     label                   ; necesar
+
     ;; DO NOT MODIFY
     popa
     leave
