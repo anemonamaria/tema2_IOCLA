@@ -22,15 +22,6 @@ my_strstr:
     ;; DO NOT MODIFY
 
     ;; TO DO: Implement my_strstr
-; parcurgem string ul si substringul pozitie cu pozitie pana intalnim caaracterul cautat
-; cand il gasim, trecem la urmatorul caracter din ambele substring uri
-; daca facem asta pana cand e epuizat din needle_len totul, inseamna ca am gasit substr 
-; facem scaderea cu pozitia la care ne aflam in haystack_len si lungimeaa substr
-; si asa gasim indexul cautat  ; PRINTF32 `ajungi? \n\0`
-; retinem de la inceput pozitia de unde am gasit prima aparitie in substr_index, daca
-; nu o gasim se reinitializeaza
-; atunci cand am parcurs o parte din needle dar am observat ca nu este cuvantul cautat, 
-; trebuie sa ne intoarcem de la urmatoarea pozitie a lui haystack
     push    ecx                 ; introducem in stiva
     push    edx                 ; introducem in stiva lungimea lui needle 
     mov     eax, 0

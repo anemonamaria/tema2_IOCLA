@@ -1,0 +1,31 @@
+Moraru Anemona Maria 323CC
+Tema 2
+Noiembrie 2020
+
+
+Implementarea temei a durat aproximativ 10 ore.
+
+In primul task, One time pad, parcurg ambele string-uri rand pe rand si 
+aplic operatia xor pe cracterele din cele doua string-uri cat timp exista
+lungimea lor. Ceea ce imi rezulta din xor retin in registrul lui plaintext 
+ajungand astfel la mesajul criptat.
+
+In al doilea task, Caesar cipher, prima data imi setez conditiile in care 
+putem aplica cifrarea (astfel incat sa cifram doar litere, nu orice fel de 
+caractere). Aplicam apoi cifrarea pe rand, incepand cu literele mari si apoi
+cu cele mici deoarece cele mari au codurile ASCII mai mici. Dupa fiecare 
+cifrare verific daca cumva exista caractere care nu se incadreaza in literele
+mari sau literele mici, in caz ca gasesc astfel de caractere scad 26 pentru
+a ma intoarce in intervalele dorite.
+
+In task-ul 4, StrStr, parcurg string-ul si substring-ul caracter cu caracter
+pana intalnesc caractere identice, in acest caz trecem la  urmatorul caracter
+in ambele string-uri. Daca nu gasesc caractere asemenea, ma mut doar prin 
+string-ul initial, nu si ce cautat. Pentru ca eu parcurg de la coada la cap
+string-urile am ales sa atribui registrului edi cate o valoare care reprezinta
+pozitia la care se gasesc cate doua caractere la fel. In momentul in care 
+ajung la pozitia finala din needle atribui valoarea din edi in variabila
+substr_index astfel gasind prima aparitie a substringului. In cazul in care
+valoarea substr_index ramane 0 cat e declarata initial inseamna ca nu s-a gasit
+nicio aparitie a substring-ului in string, acesta fiind momentul in carre 
+returnez haystack_len + 1.
